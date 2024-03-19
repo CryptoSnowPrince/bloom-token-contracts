@@ -5,7 +5,7 @@
 // Youtube: https://www.youtube.com/@revivethenaira
 // X(Twitter): https://twitter.com/revivethe_naira
 
-// ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗    ████████╗██╗  ██╗███████╗    ███╗   ██╗ █████╗ ██╗██████╗  █████╗ 
+// ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗    ████████╗██╗  ██╗███████╗    ███╗   ██╗ █████╗ ██╗██████╗  █████╗
 // ██╔══██╗██╔════╝██║   ██║██║██║   ██║██╔════╝    ╚══██╔══╝██║  ██║██╔════╝    ████╗  ██║██╔══██╗██║██╔══██╗██╔══██╗
 // ██████╔╝█████╗  ██║   ██║██║██║   ██║█████╗         ██║   ███████║█████╗      ██╔██╗ ██║███████║██║██████╔╝███████║
 // ██╔══██╗██╔══╝  ╚██╗ ██╔╝██║╚██╗ ██╔╝██╔══╝         ██║   ██╔══██║██╔══╝      ██║╚██╗██║██╔══██║██║██╔══██╗██╔══██║
@@ -179,21 +179,25 @@ contract RTN is IBEP20, Ownable {
 
         _balance[from] = _balance[from] - amount;
         _balance[to] = _balance[to] + transferAmount;
+        emit Transfer(from, to, transferAmount);
 
         uint256 burnAmount = taxTokens / 2;
         uint256 marketAmount = taxTokens - burnAmount;
 
-        _balance[burnWallet] = _balance[burnWallet] + burnAmount; // half to burn wallet
-        _balance[address(this)] = _balance[address(this)] + marketAmount; // half to market wallet
+        if (burnAmount > 0) {
+            _balance[burnWallet] = _balance[burnWallet] + burnAmount; // half to burn wallet
+            emit Transfer(from, burnWallet, burnAmount);
+        }
+
+        if (marketAmount > 0) {
+            _balance[address(this)] = _balance[address(this)] + marketAmount; // half to market wallet
+            emit Transfer(from, address(this), marketAmount);
+        }
 
         // maxHoldAmount check
         if (!_isWhiteList[to]) {
             require(_balance[to] <= maxHoldAmount, "Over Max Holding Amount");
         }
-
-        emit Transfer(from, to, transferAmount);
-        emit Transfer(from, burnWallet, burnAmount);
-        emit Transfer(from, address(this), marketAmount);
     }
 
     function _transfer(address from, address to, uint256 amount) private {
