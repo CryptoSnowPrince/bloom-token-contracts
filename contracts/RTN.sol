@@ -1,5 +1,17 @@
 // SPDX-License-Identifier: MIT
 
+// Website: https://www.revivethenaira.com/
+// Telegram: https://t.me/revivethenaira
+// Youtube: https://www.youtube.com/@revivethenaira
+// X(Twitter): https://twitter.com/revivethe_naira
+
+// ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗    ████████╗██╗  ██╗███████╗    ███╗   ██╗ █████╗ ██╗██████╗  █████╗ 
+// ██╔══██╗██╔════╝██║   ██║██║██║   ██║██╔════╝    ╚══██╔══╝██║  ██║██╔════╝    ████╗  ██║██╔══██╗██║██╔══██╗██╔══██╗
+// ██████╔╝█████╗  ██║   ██║██║██║   ██║█████╗         ██║   ███████║█████╗      ██╔██╗ ██║███████║██║██████╔╝███████║
+// ██╔══██╗██╔══╝  ╚██╗ ██╔╝██║╚██╗ ██╔╝██╔══╝         ██║   ██╔══██║██╔══╝      ██║╚██╗██║██╔══██║██║██╔══██╗██╔══██║
+// ██║  ██║███████╗ ╚████╔╝ ██║ ╚████╔╝ ███████╗       ██║   ██║  ██║███████╗    ██║ ╚████║██║  ██║██║██║  ██║██║  ██║
+// ╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚═╝  ╚═══╝  ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+
 pragma solidity 0.8.7;
 
 import "./IBEP20.sol";
@@ -7,7 +19,7 @@ import "./Ownable.sol";
 import "./IFactory.sol";
 import "./IRouter02.sol";
 
-contract BLOOM is IBEP20, Ownable {
+contract RTN is IBEP20, Ownable {
     mapping(address => uint256) private _balance;
     mapping(address => mapping(address => uint256)) private _allowances;
     mapping(address => bool) private _isExcludedFromFeeWallet;
@@ -18,15 +30,15 @@ contract BLOOM is IBEP20, Ownable {
     uint256 public sellTax = 2; // 2% sell tax
     // 1% will go to burn wallet, other 1% will go to marketing wallet
     address public burnWallet = 0x000000000000000000000000000000000000dEaD; // Burn Wallet
-    address public marketWallet = 0x2faf8ab2b9ac8Bd4176A0B9D31502bA3a59B4b41; // Market Wallet
+    address public marketWallet = 0x5F417D6A6b4bE90b7E38B72e2b090EC1A0CAA805; // Market Wallet
     uint256 public maxHoldAmount = (_totalSupply * 3) / 100; // 3% of _totalSupply
 
     uint256 public threshold = _totalSupply / 1000; // 0.1% of _totalSupply
 
     uint256 private _tax;
 
-    string private constant _name = "BLOOM";
-    string private constant _symbol = "BLOOM";
+    string private constant _name = "Revive The Naira";
+    string private constant _symbol = "RTN";
 
     IRouter02 private router;
     address public pair;

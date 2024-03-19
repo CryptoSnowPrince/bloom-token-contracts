@@ -25,13 +25,13 @@ async function main() {
     console.log(`Deployer address is ${deployer.address}`,);
     console.log(`Deployer balance is ${hre.ethers.formatEther(balance)} BNB`,);
 
-    // console.log('deploy BLOOM token contract');
-    const bloom = await hre.ethers.deployContract("BLOOM");
-    await bloom.waitForDeployment();
-    console.log(`BLOOM deployed to ${bloom.target}`);
+    // console.log('deploy RTN token contract');
+    const rtn = await hre.ethers.deployContract("RTN");
+    await rtn.waitForDeployment();
+    console.log(`RTN deployed to ${rtn.target}`);
 
     fs.writeFileSync('deployed/addresses.json', JSON.stringify({
-      'bloom': bloom.target,
+      'rtn': rtn.target,
     }, null, 2))
     console.log('deploy OK')
   } catch (error) {
