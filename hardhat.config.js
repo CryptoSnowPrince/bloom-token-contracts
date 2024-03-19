@@ -25,23 +25,27 @@ module.exports = {
   networks: {
     bsctestnet: {
       url: 'https://bsc-testnet-rpc.publicnode.com',
+      // accounts: [privateKey]
       accounts: {
         mnemonic: mnemonicPhrase,
         path: 'm/44\'/60\'/0\'/0',
         initialIndex: 0,
         count: 1,
-        passphrase: mnemonicPassword,
+        // passphrase: mnemonicPassword,
+        passphrase: '',
       },
       network_id: '*',
     },
     bsc: {
       url: 'https://binance.llamarpc.com',
+      // accounts: [privateKey]
       accounts: {
         mnemonic: mnemonicPhrase,
         path: 'm/44\'/60\'/0\'/0',
         initialIndex: 0,
         count: 1,
-        passphrase: mnemonicPassword,
+        // passphrase: mnemonicPassword,
+        passphrase: '',
       },
       network_id: '*',
     },
