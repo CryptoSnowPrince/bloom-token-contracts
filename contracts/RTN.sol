@@ -55,8 +55,7 @@ contract RTN is IBEP20, Ownable {
     event SetMaxHoldAmount(uint256 indexed maxHoldAmount);
 
     constructor() {
-        // router = IRouter02(0x10ED43C718714eb63d5aA57B78B54704E256024E); // bsc mainnet
-        router = IRouter02(0xD99D1c33F9fC3444f8101754aBC46c52416550D1); // bsc testnet
+        router = IRouter02(0x10ED43C718714eb63d5aA57B78B54704E256024E); // bsc mainnet
         pair = IFactory(router.factory()).createPair(
             address(this),
             router.WETH()
