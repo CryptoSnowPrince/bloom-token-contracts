@@ -19,19 +19,19 @@ async function main() {
     await hre.run('clean')
     await hre.run('compile')
 
-    // console.log('deploy SherpaswapFactory');
+    // console.log('deployer Info');
     const [deployer] = await hre.ethers.getSigners();
     const balance = await hre.ethers.provider.getBalance(deployer); // Get the balance of the deployer's account
     console.log(`Deployer address is ${deployer.address}`,);
-    console.log(`Deployer balance is ${hre.ethers.formatEther(balance)} ETH`,);
-    
-    // console.log('deploy Test');
-    const test = await hre.ethers.deployContract("Test", []);
-    await test.waitForDeployment();
-    console.log(`Test deployed to ${test.target}`);
-    
+    console.log(`Deployer balance is ${hre.ethers.formatEther(balance)} BNB`,);
+
+    // console.log('deploy BLOOM token contract');
+    const bloom = await hre.ethers.deployContract("BLOOM");
+    await bloom.waitForDeployment();
+    console.log(`BLOOM deployed to ${bloom.target}`);
+
     fs.writeFileSync('deployed/addresses.json', JSON.stringify({
-      'Test': test.target,
+      'bloom': bloom.target,
     }, null, 2))
     console.log('deploy OK')
   } catch (error) {
